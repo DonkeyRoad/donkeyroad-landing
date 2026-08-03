@@ -1,0 +1,10 @@
+{
+  "description": "This web application enables users to seamlessly continue designing and editing websites created with Claude, enhancing creativity and collaboration.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#f4efe3;color:#2a332a;font-family:'Pretendard',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:#3f5c3a;text-decoration:none}
+  a:hover{color:#5a7551}
+  ::selection{background:#c9d6b0;color:#26312a}
+  [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1)}
+  [data-reveal].revealed{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){[data-reveal]{opacity:1 !important;transform:none !important;transition:none}html{scroll-behavior:auto}}
+  input,select,button,textarea{font-family:inherit}
+</style>
+</helmet>
+
+<div style="overflow-x:hidden">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(244,239,227,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(63,92,58,.12)">
+  <div style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+    <a href="#top" onClick="{{ goTop }}" style="display:flex;align-items:baseline;gap:8px;font-family:'Gowun Batang',serif;font-weight:700;font-size:21px;color:#33452f;letter-spacing:-.01em">
+      동키로드<span style="font-family:'Pretendard',sans-serif;font-weight:600;font-size:11px;letter-spacing:.22em;color:#8a9678">DONKEYROAD</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:6px">
+      <a href="#why" onClick="{{ navWhy }}" style="display:none;padding:8px 12px;font-size:14.5px;font-weight:500;color:#4a5347" class="dk-navlink">소개</a>
+      <a href="#services" onClick="{{ navServices }}" style="display:none;padding:8px 12px;font-size:14.5px;font-weight:500;color:#4a5347" class="dk-navlink">서비스</a>
+      <a href="#how" onClick="{{ navHow }}" style="display:none;padding:8px 12px;font-size:14.5px;font-weight:500;color:#4a5347" class="dk-navlink">이용방법</a>
+      <a href="#video" onClick="{{ navVideo }}" style="display:none;padding:8px 12px;font-size:14.5px;font-weight:500;color:#4a5347" class="dk-navlink">영상</a>
+      <a href="#region" onClick="{{ navRegion }}" style="display:none;padding:8px 12px;font-size:14.5px;font-weight:500;color:#4a5347" class="dk-navlink">시작지역</a>
+      <button onClick="{{ navSignup }}" style="margin-left:8px;padding:9px 18px;border:none;border-radius:999px;background:#3f5c3a;color:#f7f3e8;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s" style-hover="background:#33452f">출시 알림 받기</button>
+    </nav>
+  </div>
+</header>
+<style>@media(min-width:860px){.dk-navlink{display:inline-block !important}}</style>
+
+<section id="top" style="position:relative;min-height:640px;display:flex;align-items:center;padding:120px 24px 96px;overflow:hidden;background:#dfe6cb">
+  <img src="assets/hero.jpg" alt="동서트레일 봉화·울진 숲길에 묶인 트레일 리본" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(30,42,24,.78) 0%,rgba(35,48,28,.6) 42%,rgba(40,53,31,.28) 72%,rgba(40,53,31,.12) 100%)"></div>
+  <div style="position:relative;max-width:1160px;margin:0 auto;width:100%">
+    <div style="max-width:640px" data-reveal>
+      <span style="display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(30,42,24,.42);border:1px solid rgba(244,239,227,.35);font-size:13px;font-weight:600;color:#eef0dd;margin-bottom:22px;backdrop-filter:blur(4px)">동서트레일 봉화·울진에서 준비 중</span>
+      <h1 style="margin:0 0 22px;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(34px,5.4vw,58px);line-height:1.24;letter-spacing:-.02em;color:#f7f3e8;text-wrap:balance;text-shadow:0 2px 20px rgba(20,28,16,.5)">짐 없이 걷는 길,<br>짐이 지나며 살아나는 마을</h1>
+      <p style="margin:0 0 14px;font-size:clamp(17px,2vw,20px);color:#eef0dd;max-width:540px;text-shadow:0 1px 12px rgba(20,28,16,.55)">동키로드는 장거리 트레커의 짐을 다음 목적지까지 옮기고, 텐트와 지역 먹거리까지 준비하는 트레일 여행 서비스입니다.</p>
+      <p style="margin:0 0 34px;font-size:16px;color:#d6dcc4;max-width:540px;text-shadow:0 1px 12px rgba(20,28,16,.55)">무거운 배낭은 동키로드에 맡기고, 길과 풍경을 온전히 즐겨보세요.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px">
+        <button onClick="{{ navSignup }}" style="padding:15px 28px;border:none;border-radius:999px;background:#3f5c3a;color:#f7f3e8;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(20,28,16,.4);transition:transform .2s,background .2s" style-hover="background:#33452f;transform:translateY(-2px)">출시 알림 받기</button>
+        <button onClick="{{ navWhy }}" style="padding:15px 28px;border:1.5px solid rgba(244,239,227,.55);border-radius:999px;background:rgba(244,239,227,.14);color:#f7f3e8;font-size:16px;font-weight:600;cursor:pointer;transition:background .2s;backdrop-filter:blur(4px)" style-hover="background:rgba(244,239,227,.26)">동키로드 알아보기</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="padding:104px 24px;background:#f4efe3">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:52px;align-items:center" class="dk-why-grid">
+    <div data-reveal>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.12em;color:#8a7a5c;text-transform:uppercase">THE PROBLEM</span>
+      <h2 style="margin:12px 0 26px;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(26px,3.4vw,38px);line-height:1.35;letter-spacing:-.01em;color:#2a332a">걷고 싶은 길은 길지만,<br>배낭의 무게는 걸음을 망설이게 합니다.</h2>
+      <p style="margin:0 0 18px;font-size:16.5px;color:#4a5347">장거리 트레킹에서는 야영 장비와 옷, 식량을 담은 무거운 배낭을 매일 옮겨야 합니다. 배낭의 무게는 체력을 빠르게 소모시키고, 때로는 걷고 싶은 일정을 줄이거나 도전 자체를 망설이게 만듭니다.</p>
+      <p style="margin:0 0 26px;font-size:16.5px;color:#4a5347">국내 장거리 트레일에는 길과 야영 공간이 만들어지고 있지만, 구간을 따라 짐을 옮겨주는 편의 서비스는 아직 충분하지 않습니다.</p>
+      <p style="margin:0;padding-left:18px;border-left:3px solid #a3763f;font-family:'Gowun Batang',serif;font-size:19px;font-style:italic;color:#5c4a33">길을 걷는 즐거움보다 짐을 견디는 일이 더 커지지 않도록.</p>
+    </div>
+    <div data-reveal style="position:relative;border-radius:18px;overflow:hidden;min-height:340px;background:#4a4436;box-shadow:0 20px 50px rgba(44,49,40,.2)">
+      <img src="assets/backpack.jpg" alt="배낭을 메고 숲길을 걷는 트레커" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%">
+    </div>
+  </div>
+</section>
+<style>@media(min-width:900px){.dk-why-grid{grid-template-columns:1.05fr .95fr !important}}</style>
+
+<section id="services" style="padding:104px 24px;background:linear-gradient(180deg,#efeada 0%,#e9e3d0 100%)">
+  <div style="max-width:1160px;margin:0 auto">
+    <div style="max-width:720px;margin:0 auto 56px;text-align:center" data-reveal>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.12em;color:#5a7551;text-transform:uppercase">CORE SERVICE</span>
+      <h2 style="margin:12px 0 18px;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);line-height:1.32;letter-spacing:-.01em">걷는 데 필요한 부담은 덜고,<br>길 위의 경험은 더합니다.</h2>
+      <p style="margin:0;font-size:17px;color:#586150">짐 배송을 기본으로, 텐트와 지역 먹거리 등 여행에 필요한 서비스만 선택할 수 있습니다.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px" class="dk-svc-grid">
+      <article data-reveal style="background:#fbf7ee;border:1px solid rgba(63,92,58,.14);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(44,49,40,.07);display:flex;flex-direction:column">
+        <div style="height:172px;position:relative;background:linear-gradient(150deg,#5a7551 0%,#3f5c3a 100%)">
+          <svg viewBox="0 0 200 120" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"><path d="M0 96 L60 60 L120 88 L200 52 L200 120 L0 120 Z" fill="#33452f" opacity=".55"/></svg>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px">🎒</div>
+          <span style="position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:999px;background:rgba(255,253,248,.9);font-size:12px;font-weight:700;color:#3f5c3a">기본 서비스</span>
+        </div>
+        <div style="padding:26px 24px 28px">
+          <h3 style="margin:0 0 12px;font-family:'Gowun Batang',serif;font-weight:700;font-size:22px;color:#2a332a">짐 배송</h3>
+          <p style="margin:0 0 14px;font-size:15.5px;color:#4a5347">지정된 장소에 짐을 맡기면 동키로드가 다음 숙소, 야영장, 대피소 또는 물품 보관함까지 옮겨드립니다.</p>
+          <p style="margin:0;font-size:14.5px;color:#6b7266">오늘 걸을 때 필요한 짐만 챙기고 다음 목적지에서 짐을 편리하게 찾아보세요.</p>
+        </div>
+      </article>
+      <article data-reveal style="background:#fbf7ee;border:1px solid rgba(63,92,58,.14);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(44,49,40,.07);display:flex;flex-direction:column">
+        <div style="height:172px;position:relative;background:linear-gradient(150deg,#7c9068 0%,#5a7551 100%)">
+          <svg viewBox="0 0 200 120" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"><path d="M0 100 L100 44 L200 100 L200 120 L0 120 Z" fill="#4a6142" opacity=".5"/></svg>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px">⛺</div>
+        </div>
+        <div style="padding:26px 24px 28px">
+          <h3 style="margin:0 0 12px;font-family:'Gowun Batang',serif;font-weight:700;font-size:22px;color:#2a332a">텐트 지원</h3>
+          <p style="margin:0 0 14px;font-size:15.5px;color:#4a5347">텐트 대여부터 설치와 철수까지, 번거로운 야영 준비를 덜어드립니다.</p>
+          <p style="margin:0;font-size:14.5px;color:#6b7266">사용한 텐트의 회수와 건조·세척·보관까지 동키로드가 맡아 걷기에 집중할 수 있도록 돕습니다.</p>
+        </div>
+      </article>
+      <article data-reveal style="background:#fbf7ee;border:1px solid rgba(63,92,58,.14);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(44,49,40,.07);display:flex;flex-direction:column">
+        <div style="height:172px;position:relative;background:linear-gradient(150deg,#c08a4a 0%,#8a5c34 100%)">
+          <svg viewBox="0 0 200 120" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"><circle cx="150" cy="40" r="34" fill="#e0b070" opacity=".4"/></svg>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px">🍱</div>
+        </div>
+        <div style="padding:26px 24px 28px">
+          <h3 style="margin:0 0 12px;font-family:'Gowun Batang',serif;font-weight:700;font-size:22px;color:#2a332a">지역 미식</h3>
+          <p style="margin:0 0 14px;font-size:15.5px;color:#4a5347">걷기를 마친 곳에서 봉화·울진의 맛을 만나보세요. 지역 음식과 특산품을 트레일의 다음 목적지로 전해드립니다.</p>
+          <p style="margin:0;font-size:14.5px;color:#6b7266">지역 식재료 도시락부터 완주를 기념할 지역 먹거리 세트까지.</p>
+        </div>
+      </article>
+    </div>
+    <p style="margin:40px 0 0;text-align:center;font-size:15px;color:#6b7266" data-reveal>짐 배송을 기본으로, 필요한 서비스만 선택하세요.</p>
+  </div>
+</section>
+<style>@media(min-width:820px){.dk-svc-grid{grid-template-columns:repeat(3,1fr) !important}}</style>
+
+<section id="how" style="padding:104px 24px;background:#f4efe3">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="max-width:680px;margin:0 auto 54px;text-align:center" data-reveal>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.12em;color:#8a7a5c;text-transform:uppercase">HOW IT WORKS</span>
+      <h2 style="margin:12px 0 0;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);line-height:1.32;letter-spacing:-.01em">짐은 맡기고,<br>길은 가볍게 걸으세요.</h2>
+    </div>
+    <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:14px" class="dk-steps">
+      <li data-reveal style="display:flex;gap:18px;align-items:flex-start;background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:14px;padding:22px 24px">
+        <span style="flex:none;width:38px;height:38px;border-radius:50%;background:#3f5c3a;color:#f7f3e8;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center">1</span>
+        <div><h3 style="margin:0 0 4px;font-size:17px;font-weight:700;color:#2a332a">구간과 일정 준비</h3><p style="margin:0;font-size:15px;color:#586150">걷고 싶은 구간과 일정을 정하고, 숙소·야영장·대피소는 해당 예약 사이트에서 직접 예약합니다.</p></div>
+      </li>
+      <li data-reveal style="display:flex;gap:18px;align-items:flex-start;background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:14px;padding:22px 24px">
+        <span style="flex:none;width:38px;height:38px;border-radius:50%;background:#3f5c3a;color:#f7f3e8;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center">2</span>
+        <div><h3 style="margin:0 0 4px;font-size:17px;font-weight:700;color:#2a332a">동키로드 서비스 선택</h3><p style="margin:0;font-size:15px;color:#586150">동키로드 웹사이트에서 짐 배송과 필요한 텐트·지역 미식 서비스를 선택합니다.</p></div>
+      </li>
+      <li data-reveal style="display:flex;gap:18px;align-items:flex-start;background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:14px;padding:22px 24px">
+        <span style="flex:none;width:38px;height:38px;border-radius:50%;background:#3f5c3a;color:#f7f3e8;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center">3</span>
+        <div><h3 style="margin:0 0 4px;font-size:17px;font-weight:700;color:#2a332a">장소 입력 및 결제</h3><p style="margin:0;font-size:15px;color:#586150">짐을 맡기고 받을 장소를 입력한 뒤 동키로드 서비스를 결제합니다.</p></div>
+      </li>
+      <li data-reveal style="display:flex;gap:18px;align-items:flex-start;background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:14px;padding:22px 24px">
+        <span style="flex:none;width:38px;height:38px;border-radius:50%;background:#3f5c3a;color:#f7f3e8;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center">4</span>
+        <div><h3 style="margin:0 0 4px;font-size:17px;font-weight:700;color:#2a332a">짐 맡기기</h3><p style="margin:0;font-size:15px;color:#586150">지정한 숙소, 야영장, 대피소 또는 물품 보관함에 짐을 맡기고 가볍게 걷습니다.</p></div>
+      </li>
+      <li data-reveal style="display:flex;gap:18px;align-items:flex-start;background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:14px;padding:22px 24px">
+        <span style="flex:none;width:38px;height:38px;border-radius:50%;background:#3f5c3a;color:#f7f3e8;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center">5</span>
+        <div><h3 style="margin:0 0 4px;font-size:17px;font-weight:700;color:#2a332a">다음 목적지에서 수령</h3><p style="margin:0;font-size:15px;color:#586150">걷기를 마친 뒤 다음 목적지에서 짐과 신청한 서비스를 만납니다.</p></div>
+      </li>
+    </ol>
+    <p style="margin:26px auto 0;max-width:760px;text-align:center;font-size:13.5px;color:#8a9078;background:rgba(90,117,81,.09);border-radius:10px;padding:12px 18px" data-reveal>숙소·야영장·대피소 예약은 각 운영기관의 예약 사이트에서 별도로 진행됩니다.</p>
+  </div>
+</section>
+
+<section id="video" style="padding:104px 24px;background:linear-gradient(180deg,#33452f 0%,#28351f 100%);color:#eef0dd">
+  <div style="max-width:960px;margin:0 auto;text-align:center">
+    <h2 style="margin:0 0 14px;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);line-height:1.3;letter-spacing:-.01em" data-reveal>짐을 내려놓으면, 길이 달라집니다.</h2>
+    <p style="margin:0 0 40px;font-size:17px;color:#c3d0a6" data-reveal>동키로드와 함께 더 가볍고 편안해지는 트레일 여행을 만나보세요.</p>
+    <div data-reveal style="position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4);background:#1c241a">
+      <sc-if value="{{ videoLoaded }}" hint-placeholder-val="{{ false }}">
+        <iframe src="{{ videoEmbedUrl }}" title="동키로드 홍보 영상" allow="accelerated-destination; autoplay; encrypted-media; picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+      </sc-if>
+      <sc-if value="{{ videoNotLoaded }}" hint-placeholder-val="{{ true }}">
+        <button onClick="{{ loadVideo }}" style="position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:#1c241a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#eef0dd">
+          <img src="{{ videoThumbUrl }}" alt="동키로드 홍보 영상 미리보기" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7">
+          <span style="position:relative;width:82px;height:82px;border-radius:50%;background:rgba(244,239,227,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.45)"><span style="margin-left:5px;border-style:solid;border-width:15px 0 15px 26px;border-color:transparent transparent transparent #33452f"></span></span>
+          <span style="position:relative;font-size:15px;font-weight:600;letter-spacing:.02em;text-shadow:0 1px 10px rgba(0,0,0,.6)">홍보 영상 재생</span>
+        </button>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section id="who" style="padding:104px 24px;background:#f4efe3">
+  <div style="max-width:1100px;margin:0 auto">
+    <h2 style="margin:0 0 46px;text-align:center;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(24px,3.2vw,34px);letter-spacing:-.01em" data-reveal>이런 분께 동키로드를 추천해요.</h2>
+    <div style="display:grid;grid-template-columns:1fr;gap:18px" class="dk-who-grid">
+      <div data-reveal style="background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:16px;padding:26px 24px">
+        <div style="font-size:30px;margin-bottom:12px">🥾</div>
+        <h3 style="margin:0 0 8px;font-size:16.5px;font-weight:700;color:#2a332a">무거운 배낭이 부담스러운 트레커</h3>
+        <p style="margin:0;font-size:14.5px;color:#586150">장거리 트레킹에 도전하고 싶지만 무거운 짐 때문에 망설였던 분</p>
+      </div>
+      <div data-reveal style="background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:16px;padding:26px 24px">
+        <div style="font-size:30px;margin-bottom:12px">🌿</div>
+        <h3 style="margin:0 0 8px;font-size:16.5px;font-weight:700;color:#2a332a">더 편안하게 걷고 싶은 사람</h3>
+        <p style="margin:0;font-size:14.5px;color:#586150">체력이나 부상 이력 때문에 짐을 메고 오래 걷기 어려운 분</p>
+      </div>
+      <div data-reveal style="background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:16px;padding:26px 24px">
+        <div style="font-size:30px;margin-bottom:12px">📷</div>
+        <h3 style="margin:0 0 8px;font-size:16.5px;font-weight:700;color:#2a332a">별도의 장비가 필요한 하이커</h3>
+        <p style="margin:0;font-size:14.5px;color:#586150">카메라와 촬영 장비 등 걷는 짐 외에 별도의 장비를 가지고 다니는 분</p>
+      </div>
+      <div data-reveal style="background:#fbf7ee;border:1px solid rgba(63,92,58,.12);border-radius:16px;padding:26px 24px">
+        <div style="font-size:30px;margin-bottom:12px">👨‍👩‍👧</div>
+        <h3 style="margin:0 0 8px;font-size:16.5px;font-weight:700;color:#2a332a">야영이 낯선 입문자와 가족</h3>
+        <p style="margin:0;font-size:14.5px;color:#586150">텐트와 야영 장비의 부담을 줄이고 조금 더 편안하게 시작하고 싶은 분</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>@media(min-width:760px){.dk-who-grid{grid-template-columns:repeat(2,1fr) !important}}@media(min-width:1040px){.dk-who-grid{grid-template-columns:repeat(4,1fr) !important}}</style>
+
+<section id="region" style="padding:104px 24px;background:linear-gradient(180deg,#e9e3d0 0%,#dfd8c2 100%)">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px;align-items:center" class="dk-region-grid">
+    <div data-reveal>
+      <span style="font-size:13px;font-weight:700;letter-spacing:.12em;color:#8a7a5c;text-transform:uppercase">STARTING SOON</span>
+      <h2 style="margin:12px 0 22px;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(25px,3.4vw,36px);line-height:1.34;letter-spacing:-.01em">동키로드의 첫 여정을<br>동서트레일 봉화·울진에서 준비하고 있습니다.</h2>
+      <p style="margin:0 0 16px;font-size:16px;color:#4a5347">동키로드는 동서트레일 봉화·울진 구간을 직접 걸으며 트레커와 지역의 목소리를 확인했습니다. 이곳에서 짐 배송과 트레일 편의 서비스를 먼저 선보이기 위해 준비하고 있습니다.</p>
+      <p style="margin:0;padding-left:18px;border-left:3px solid #5a7551;font-family:'Gowun Batang',serif;font-size:18px;font-style:italic;color:#3f5c3a">여행자는 더 가볍게 걷고, 지역에는 여행의 가치가 남도록.</p>
+    </div>
+    <div data-reveal style="display:flex;flex-direction:column;gap:16px">
+      <div style="border-radius:18px;overflow:hidden;background:#3f5c3a;box-shadow:0 16px 40px rgba(44,49,40,.16)">
+        <img src="assets/region.jpg" alt="봉화·울진 동서트레일 데크길을 걷는 하이커들" style="display:block;width:100%;height:auto">
+      </div>
+    </div>
+  </div>
+</section>
+<style>@media(min-width:900px){.dk-region-grid{grid-template-columns:1fr 1fr !important}}</style>
+
+<section id="signup" style="padding:104px 24px 108px;background:linear-gradient(180deg,#33452f 0%,#3f5c3a 100%);color:#eef0dd">
+  <div style="max-width:560px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:36px" data-reveal>
+      <h2 style="margin:0 0 14px;font-family:'Gowun Batang',serif;font-weight:700;font-size:clamp(23px,3.1vw,32px);line-height:1.3;letter-spacing:-.02em;word-break:keep-all;text-wrap:balance">동키로드의 첫 여정을 함께해 주세요.</h2>
+      <p style="margin:0;font-size:16.5px;color:#c3d0a6">동키로드가 봉화·울진에서 시작될 때 가장 먼저 알려드릴게요.</p>
+    </div>
+
+    <div data-reveal style="background:#fbf7ee;color:#2a332a;border-radius:22px;padding:32px 30px;box-shadow:0 24px 60px rgba(0,0,0,.32)">
+
+      <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}">
+          <label style="display:block;font-size:14px;font-weight:700;margin-bottom:8px">이메일 <span style="color:#b0532f">*</span></label>
+          <input type="email" value="{{ email }}" onInput="{{ setEmail }}" placeholder="you@example.com" autoComplete="email" style="width:100%;padding:14px 16px;border:1.5px solid rgba(63,92,58,.3);border-radius:12px;font-size:16px;background:#fff;color:#2a332a;margin-bottom:22px" style-focus="border-color:#3f5c3a;outline:none">
+
+          <label style="display:block;font-size:14px;font-weight:700;margin-bottom:8px">연령대 <span style="font-weight:500;color:#8a9078;font-size:12.5px">선택</span></label>
+          <div style="position:relative;margin-bottom:22px">
+            <select value="{{ ageGroup }}" onChange="{{ setAge }}" style="width:100%;padding:14px 16px;border:1.5px solid rgba(63,92,58,.3);border-radius:12px;font-size:15.5px;background:#fff;color:#2a332a;appearance:none;cursor:pointer">
+              <option value="">선택 안 함</option>
+              <sc-for list="{{ ageGroups }}" as="ag" hint-placeholder-count="7"><option value="{{ ag }}">{{ ag }}</option></sc-for>
+            </select>
+            <span style="position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:#8a9078">▾</span>
+          </div>
+
+          <label style="display:block;font-size:14px;font-weight:700;margin-bottom:8px">성별 <span style="font-weight:500;color:#8a9078;font-size:12.5px">선택</span></label>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:26px">
+            <sc-for list="{{ genderOptions }}" as="g" hint-placeholder-count="3">
+              <button type="button" onClick="{{ g.select }}" style="{{ g.style }}">{{ g.label }}</button>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;padding:18px;background:rgba(90,117,81,.07);border-radius:14px">
+            <label style="display:flex;gap:11px;align-items:flex-start;cursor:pointer;font-size:14px;color:#3a4535">
+              <input type="checkbox" checked="{{ privacyConsent }}" onChange="{{ togglePrivacy }}" style="margin-top:3px;width:18px;height:18px;accent-color:#3f5c3a;flex:none;cursor:pointer">
+              <span><b style="color:#2a332a">[필수]</b> 개인정보 수집·이용 동의 <span style="color:#7c8570">(이메일, 선택 시 연령대·성별)</span></span>
+            </label>
+            <label style="display:flex;gap:11px;align-items:flex-start;cursor:pointer;font-size:14px;color:#3a4535">
+              <input type="checkbox" checked="{{ notifyConsent }}" onChange="{{ toggleNotify }}" style="margin-top:3px;width:18px;height:18px;accent-color:#3f5c3a;flex:none;cursor:pointer">
+              <span><b style="color:#2a332a">[필수]</b> 출시 알림 이메일 수신 동의</span>
+            </label>
+            <label style="display:flex;gap:11px;align-items:flex-start;cursor:pointer;font-size:14px;color:#3a4535">
+              <input type="checkbox" checked="{{ marketingConsent }}" onChange="{{ toggleMarketing }}" style="margin-top:3px;width:18px;height:18px;accent-color:#3f5c3a;flex:none;cursor:pointer">
+              <span><b style="color:#7c8570">[선택]</b> 이벤트·혜택 등 마케팅 정보 수신 동의</span>
+            </label>
+          </div>
+
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-bottom:16px;padding:12px 15px;background:#fbe9e2;border:1px solid #e6b8a4;border-radius:11px;font-size:14px;color:#9c4324">{{ errorMsg }}</div>
+          </sc-if>
+
+          <button type="submit" disabled="{{ submitting }}" style="{{ submitBtnStyle }}">{{ submitLabel }}</button>
+          <p style="margin:14px 0 0;font-size:11.5px;color:#9aa08e;text-align:center">개인정보 처리 주체·보유 기간·문의처는 정식 운영 전 확정됩니다. [개인정보 처리방침 확정 필요]</p>
+        </form>
+      </sc-if>
+
+      <sc-if value="{{ showPending }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:8px 4px">
+          <div style="width:66px;height:66px;margin:0 auto 20px;border-radius:50%;background:#e7efd9;display:flex;align-items:center;justify-content:center;font-size:32px">📧</div>
+          <h3 style="margin:0 0 12px;font-family:'Gowun Batang',serif;font-weight:700;font-size:22px;color:#2a332a">확인 메일을 보냈어요</h3>
+          <p style="margin:0 0 8px;font-size:15px;color:#4a5347"><b style="color:#3f5c3a">{{ email }}</b> 로 확인 메일을 보냈습니다.</p>
+          <p style="margin:0 0 24px;font-size:15px;color:#4a5347">메일의 확인 버튼을 누르면 출시 알림 신청이 완료됩니다.</p>
+          <sc-if value="{{ pendingNotice }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-bottom:20px;padding:11px 14px;background:#fdf4e3;border:1px solid #e6cf9e;border-radius:11px;font-size:13.5px;color:#8a6a2a">아직 이메일 확인이 완료되지 않았습니다. 받은 편지함의 확인 메일을 확인해 주세요.</div>
+          </sc-if>
+          <button onClick="{{ onConfirm }}" disabled="{{ confirming }}" style="width:100%;padding:15px;border:none;border-radius:12px;background:#3f5c3a;color:#f7f3e8;font-size:15.5px;font-weight:700;cursor:pointer">{{ confirmLabel }}</button>
+          <p style="margin:12px 0 0;font-size:12px;color:#9aa08e">데모: 실제로는 이메일의 링크에서 확인이 이뤄집니다.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showConfirmed }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:14px 4px">
+          <div style="width:70px;height:70px;margin:0 auto 22px;border-radius:50%;background:#3f5c3a;display:flex;align-items:center;justify-content:center;font-size:36px">✓</div>
+          <h3 style="margin:0 0 14px;font-family:'Gowun Batang',serif;font-weight:700;font-size:23px;color:#2a332a">신청이 완료되었습니다</h3>
+          <p style="margin:0 0 24px;font-size:15.5px;color:#4a5347">출시 알림 신청이 완료되었습니다. 동키로드의 첫 여정이 시작되면 이메일로 알려드릴게요.</p>
+          <button onClick="{{ resetForm }}" style="padding:11px 22px;border:1.5px solid rgba(63,92,58,.35);border-radius:999px;background:transparent;color:#3f5c3a;font-size:14px;font-weight:600;cursor:pointer">다른 이메일로 신청</button>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</section>
+
+<footer style="background:#28351f;color:#c3d0a6;padding:52px 24px 40px">
+  <div style="max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start">
+    <div style="max-width:360px">
+      <div style="font-family:'Gowun Batang',serif;font-weight:700;font-size:20px;color:#eef0dd;margin-bottom:10px">동키로드 <span style="font-family:'Pretendard',sans-serif;font-size:11px;letter-spacing:.2em;color:#8ea079">DONKEYROAD</span></div>
+      <p style="margin:0;font-size:14px;color:#9db184">짐 없이 걷는 길, 짐이 지나며 살아나는 마을 — 동키로드</p>
+    </div>
+    <div style="font-size:13.5px;line-height:2;color:#9db184">
+      <div>문의: <span style="color:#7c8f6b">[공식 문의 이메일 확정 필요]</span></div>
+      <div>SNS: <span style="color:#7c8f6b">[공식 SNS 확정 필요]</span></div>
+      <div><a href="#top" onClick="{{ goTop }}" style="color:#c3d0a6">개인정보 처리방침</a> <span style="color:#5a6b47">(확정 필요)</span></div>
+    </div>
+  </div>
+  <div style="max-width:1100px;margin:32px auto 0;padding-top:20px;border-top:1px solid rgba(195,208,166,.16);font-size:12.5px;color:#7c8f6b;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between">
+    <span>© 2026 DONKEYROAD. All rights reserved.</span>
+    <span>※ 로고·색상·사진은 임시 자산이며 최종 브랜드 자산이 아닙니다.</span>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    email: '', ageGroup: '', gender: '',
+    privacyConsent: false, notifyConsent: false, marketingConsent: false,
+    status: 'idle',        // idle | submitting | pending | confirmed
+    confirming: false,
+    pendingNotice: false,  // existing-but-unconfirmed email
+    error: '',
+    videoLoaded: false,
+  };
+
+  STORE_KEY = 'donkeyroad_subscribers';
+  AGE_GROUPS = ['10대 이하','20대','30대','40대','50대','60대','70대 이상'];
+  GENDERS = [
+    { value: 'female', label: '여성' },
+    { value: 'male', label: '남성' },
+    { value: 'no_answer', label: '응답 안 함' },
+  ];
+  VIDEO_ID = 'wlj48-k40W4'; // 동키로드 홍보 영상
+
+  componentDidMount() {
+    if (typeof IntersectionObserver !== 'undefined') {
+      this._io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('revealed'); this._io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      requestAnimationFrame(() => {
+        document.querySelectorAll('[data-reveal]').forEach((el) => this._io.observe(el));
+      });
+    } else {
+      document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('revealed'));
+    }
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); }
+
+  _readStore() {
+    try { return JSON.parse(localStorage.getItem(this.STORE_KEY) || '[]'); } catch { return []; }
+  }
+  _writeStore(list) {
+    try { localStorage.setItem(this.STORE_KEY, JSON.stringify(list)); } catch {}
+  }
+
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 60;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  onSubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (this.state.status === 'submitting') return;
+    const email = (this.state.email || '').trim().toLowerCase();
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!emailOk) { this.setState({ error: '올바른 이메일 주소를 입력해 주세요.' }); return; }
+    if (!this.state.privacyConsent || !this.state.notifyConsent) {
+      this.setState({ error: '출시 알림 신청을 위해 필수 동의 항목을 확인해 주세요.' }); return;
+    }
+    const store = this._readStore();
+    const existing = store.find((s) => s.email === email);
+    if (existing) {
+      if (existing.status === 'subscribed') {
+        this.setState({ error: '이미 출시 알림을 신청한 이메일입니다.' }); return;
+      }
+      // pending 상태로 존재 → 재확인 안내
+      this.setState({ error: '', status: 'pending', pendingNotice: true, email });
+      return;
+    }
+    this.setState({ error: '', status: 'submitting' });
+    setTimeout(() => {
+      const list = this._readStore();
+      if (!list.find((s) => s.email === email)) {
+        list.push({
+          email, status: 'pending',
+          ageGroup: this.state.ageGroup || null,
+          gender: this.state.gender || null,
+          marketingConsent: this.state.marketingConsent,
+          createdAt: new Date().toISOString(),
+        });
+        this._writeStore(list);
+      }
+      this.setState({ status: 'pending', pendingNotice: false, email });
+    }, 900);
+  };
+
+  onConfirm = () => {
+    if (this.state.confirming) return;
+    this.setState({ confirming: true });
+    setTimeout(() => {
+      const email = this.state.email;
+      const list = this._readStore();
+      const s = list.find((x) => x.email === email);
+      if (s) { s.status = 'subscribed'; s.verifiedAt = new Date().toISOString(); this._writeStore(list); }
+      this.setState({ confirming: false, status: 'confirmed', pendingNotice: false });
+    }, 800);
+  };
+
+  resetForm = () => this.setState({
+    email: '', ageGroup: '', gender: '',
+    privacyConsent: false, notifyConsent: false, marketingConsent: false,
+    status: 'idle', error: '', pendingNotice: false,
+  });
+
+  renderVals() {
+    const st = this.state;
+    const genderOptions = this.GENDERS.map((g) => {
+      const active = st.gender === g.value;
+      return {
+        label: g.label,
+        select: () => this.setState({ gender: active ? '' : g.value }),
+        style: `padding:12px 8px;border-radius:11px;font-size:14.5px;font-weight:600;cursor:pointer;transition:all .18s;border:1.5px solid ${active ? '#3f5c3a' : 'rgba(63,92,58,.28)'};background:${active ? '#3f5c3a' : '#fff'};color:${active ? '#f7f3e8' : '#4a5347'}`,
+      };
+    });
+
+    const submitting = st.status === 'submitting';
+    return {
+      // nav / scroll
+      goTop: (e) => { if (e) e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      navWhy: (e) => { if (e) e.preventDefault(); this.scrollTo('why'); },
+      navServices: (e) => { if (e) e.preventDefault(); this.scrollTo('services'); },
+      navHow: (e) => { if (e) e.preventDefault(); this.scrollTo('how'); },
+      navVideo: (e) => { if (e) e.preventDefault(); this.scrollTo('video'); },
+      navRegion: (e) => { if (e) e.preventDefault(); this.scrollTo('region'); },
+      navSignup: (e) => { if (e) e.preventDefault(); this.scrollTo('signup'); },
+
+      // video
+      videoLoaded: st.videoLoaded,
+      videoNotLoaded: !st.videoLoaded,
+      loadVideo: () => this.setState({ videoLoaded: true }),
+      videoEmbedUrl: `https://www.youtube.com/embed/${this.VIDEO_ID}?autoplay=1&rel=0`,
+      videoThumbUrl: `https://i.ytimg.com/vi/${this.VIDEO_ID}/hqdefault.jpg`,
+
+      // form fields
+      email: st.email,
+      ageGroup: st.ageGroup,
+      ageGroups: this.AGE_GROUPS,
+      genderOptions,
+      privacyConsent: st.privacyConsent,
+      notifyConsent: st.notifyConsent,
+      marketingConsent: st.marketingConsent,
+      setEmail: (e) => this.setState({ email: e.target.value, error: '' }),
+      setAge: (e) => this.setState({ ageGroup: e.target.value }),
+      togglePrivacy: (e) => this.setState({ privacyConsent: e.target.checked, error: '' }),
+      toggleNotify: (e) => this.setState({ notifyConsent: e.target.checked, error: '' }),
+      toggleMarketing: (e) => this.setState({ marketingConsent: e.target.checked }),
+
+      // flow views
+      showForm: st.status === 'idle' || st.status === 'submitting',
+      showPending: st.status === 'pending',
+      showConfirmed: st.status === 'confirmed',
+      pendingNotice: st.pendingNotice,
+
+      // submit button
+      onSubmit: this.onSubmit,
+      submitting,
+      submitLabel: submitting ? '신청하고 있습니다...' : '출시 알림 받기',
+      submitBtnStyle: `width:100%;padding:16px;border:none;border-radius:12px;background:${submitting ? '#6b7d63' : '#3f5c3a'};color:#f7f3e8;font-size:16px;font-weight:700;cursor:${submitting ? 'default' : 'pointer'};transition:background .2s`,
+
+      // confirm
+      onConfirm: this.onConfirm,
+      confirming: st.confirming,
+      confirmLabel: st.confirming ? '확인 중...' : '이메일 확인하기 (데모)',
+
+      resetForm: this.resetForm,
+
+      // error
+      hasError: !!st.error,
+      errorMsg: st.error,
+    };
+  }
+}
+</script>
+</body>
+</html>
