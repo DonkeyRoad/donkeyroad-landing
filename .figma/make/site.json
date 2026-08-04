@@ -5,6 +5,9 @@
   "robots": {
     "index": false
   },
+  "analytics": {
+    "googleAnalyticsId": "G-6930VHKCV8"
+  },
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
