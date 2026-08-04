@@ -3,6 +3,7 @@ import hero7 from '@/imports/7.webp'
 import backpack3 from '@/imports/3.webp'
 import region8 from '@/imports/8.webp'
 import luggage1 from '@/imports/1.webp'
+import { track, useScrollDepth } from '@/analytics'
 
 // ── Scroll reveal hook ───────────────────────────────────────────────────────
 function useReveal() {
@@ -307,6 +308,7 @@ function Signup() {
           <p style={{ margin: '0 0 26px', fontSize: 15, lineHeight: 1.65, color: '#4a5347', wordBreak: 'keep-all' }}>카카오톡 채널을 추가하고 동키로드의 첫 소식과 새로운 코스 소식을 가장 먼저 만나보세요.</p>
 
           <a href={KAKAO_CHANNEL_URL} target="_blank" rel="noopener noreferrer"
+            onClick={() => track('kakao_channel_add', { location: 'signup_cta' })}
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9, width: '100%', padding: 16, borderRadius: 12, background: '#fee500', color: '#191600', fontSize: 16, fontWeight: 700, textDecoration: 'none', transition: 'background .2s, transform .2s' }}
             onMouseEnter={(e) => { e.currentTarget.style.background = '#f5dc00'; e.currentTarget.style.transform = 'translateY(-2px)' }}
             onMouseLeave={(e) => { e.currentTarget.style.background = '#fee500'; e.currentTarget.style.transform = '' }}>
@@ -330,7 +332,7 @@ function Footer() {
           <p style={{ margin: 0, fontSize: 14, color: '#9db184' }}>짐 없이 걷는 길, 짐이 지나며 살아나는 마을 — 동키로드</p>
         </div>
         <div style={{ fontSize: 13.5, lineHeight: 2, color: '#9db184' }}>
-          <div>문의: <a href={KAKAO_CHANNEL_CHAT_URL} target="_blank" rel="noopener noreferrer" style={{ color: '#c3d0a6' }}>카카오톡 채널 | 동키로드</a></div>
+          <div>문의: <a href={KAKAO_CHANNEL_CHAT_URL} target="_blank" rel="noopener noreferrer" onClick={() => track('kakao_channel_chat', { location: 'footer' })} style={{ color: '#c3d0a6' }}>카카오톡 채널 | 동키로드</a></div>
           <div>이메일: <a href="mailto:donkeyroad.official@gmail.com" style={{ color: '#c3d0a6' }}>donkeyroad.official@gmail.com</a></div>
           <div>인스타그램: <span style={{ color: '#c3d0a6' }}>@donkeyroad.official &nbsp;·&nbsp; @team.donkeylog</span></div>
         </div>
@@ -345,6 +347,7 @@ function Footer() {
 // ── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
   useReveal()
+  useScrollDepth()
   return (
     <div style={{ overflowX: 'hidden' }}>
       <Header />
