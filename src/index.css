@@ -14,6 +14,14 @@ body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
 }
+/* Korean wraps mid-word by default, which splits 어절 like "달라집니 / 다."
+   keep-all breaks on spaces only; break-word still rescues a single token
+   (long URL, email) that would otherwise overflow its container. */
+h1, h2, h3, h4, h5, h6, p, li, blockquote {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
 a { color: #3f5c3a; text-decoration: none; }
 a:hover { color: #5a7551; }
 ::selection { background: #c9d6b0; color: #26312a; }

@@ -102,7 +102,7 @@ function Why() {
       <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr', gap: 52, alignItems: 'center' }} className="dk-why-grid">
         <div data-reveal>
           <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '.12em', color: '#8a7a5c', textTransform: 'uppercase' }}>THE PROBLEM</span>
-          <h2 style={{ margin: '12px 0 26px', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: 'clamp(22px,2.8vw,34px)', lineHeight: 1.42, letterSpacing: '-.01em', color: '#2a332a', wordBreak: 'keep-all' }}>걷고 싶은 길은 길지만,<br />배낭의 무게는 걸음을<br />망설이게 합니다.</h2>
+          <h2 style={{ margin: '12px 0 26px', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: 'clamp(22px,2.8vw,34px)', lineHeight: 1.42, letterSpacing: '-.01em', color: '#2a332a', wordBreak: 'keep-all' }}>걷고 싶은 길은 길지만, 배낭의 무게는 걸음을 망설이게 합니다.</h2>
           <p style={{ margin: '0 0 18px', fontSize: 16.5, color: '#4a5347' }}>장거리 트레킹에서는 야영 장비와 옷, 식량을 담은 무거운 배낭을 매일 옮겨야 합니다. 배낭의 무게는 체력을 빠르게 소모시키고, 때로는 걷고 싶은 일정을 줄이거나 도전 자체를 망설이게 만듭니다.</p>
           <p style={{ margin: '0 0 26px', fontSize: 16.5, color: '#4a5347' }}>국내 장거리 트레일에는 길과 야영 공간이 만들어지고 있지만, 구간을 따라 짐을 옮겨주는 편의 서비스는 아직 충분하지 않습니다.</p>
           <p style={{ margin: 0, paddingLeft: 18, borderLeft: '3px solid #a3763f', fontFamily: "'Gowun Batang', serif", fontSize: 19, fontStyle: 'italic', color: '#5c4a33' }}>길을 걷는 즐거움보다 짐을 견디는 일이 더 커지지 않도록.</p>
