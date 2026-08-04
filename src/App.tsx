@@ -124,21 +124,21 @@ function Services() {
       img: luggage1,
       imgPos: 'center',
       overlay: 'rgba(33,52,25,.18)',
-      desc: '지정된 장소에 짐을 맡기면 동키로드가 다음 숙소, 야영장, 대피소 또는 물품 보관함까지 옮겨드립니다.',
+      desc: '지정된 장소에 짐을 맡기면 동키로드가 다음 숙소, 야영장, 대피소 또는 물품 보관함까지 안전하게 옮겨드립니다.',
       sub: '오늘 걸을 때 필요한 짐만 챙기고 다음 목적지에서 짐을 편리하게 찾아보세요.',
     },
     {
       icon: null, label: null, title: '텐트 지원',
-      img: 'https://images.unsplash.com/photo-1464547323744-4edd0cd0c746?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-      imgPos: 'center 60%',
-      overlay: 'rgba(20,38,20,.18)',
-      desc: '텐트 대여부터 설치와 철수까지,\n번거로운 야영 준비를 덜어드립니다.\n가볍게 떠나 자연을 온전히 즐겨보세요.',
+      img: 'https://images.unsplash.com/photo-1698736206122-6dbed5fc5216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=85',
+      imgPos: 'center 58%',
+      overlay: 'rgba(20,38,20,.14)',
+      desc: '텐트 대여부터 설치와 철수까지, 번거로운 야영 준비를 덜어드립니다. 가볍게 떠나 자연을 온전히 즐겨보세요.',
       sub: '사용한 텐트의 회수와 건조·세척·보관까지 동키로드가 맡아 걷기에 집중할 수 있도록 돕습니다.',
     },
     {
       icon: null, label: null, title: '지역 미식',
-      img: 'https://images.unsplash.com/photo-1763994684055-a2401f64391b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800&q=80',
-      imgPos: 'center',
+      img: 'https://images.unsplash.com/photo-1761303506087-9788d0a98e87?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080&q=85',
+      imgPos: 'center 53%',
       overlay: 'rgba(80,44,10,.18)',
       desc: '걷기를 마친 곳에서 봉화·울진의 맛을 만나보세요. 지역 음식과 특산품을 트레일의 다음 목적지로 전해드립니다.',
       sub: '지역 식재료 도시락부터 완주를 기념할 지역 먹거리 세트까지.',
@@ -191,7 +191,7 @@ function HowItWorks() {
           <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: '.12em', color: '#8a7a5c', textTransform: 'uppercase' }}>HOW IT WORKS</span>
           <h2 style={{ margin: '12px 0 0', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: 'clamp(26px,3.6vw,40px)', lineHeight: 1.32, letterSpacing: '-.01em' }}>짐은 맡기고,<br />길은 가볍게 걸으세요.</h2>
         </div>
-        <ol style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gridTemplateColumns: '1fr', gap: 14 }} className="dk-steps">
+        <ol style={{ listStyle: 'none', margin: '0 auto', padding: 0, maxWidth: 760, display: 'grid', gridTemplateColumns: '1fr', gap: 14 }}>
           {steps.map(([title, desc], i) => (
             <li key={i} data-reveal style={{ display: 'flex', gap: 18, alignItems: 'flex-start', background: '#fbf7ee', border: '1px solid rgba(63,92,58,.12)', borderRadius: 14, padding: '22px 24px' }}>
               <span style={{ flex: 'none', width: 38, height: 38, borderRadius: '50%', background: '#3f5c3a', color: '#f7f3e8', fontWeight: 700, fontSize: 17, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i + 1}</span>
@@ -239,9 +239,9 @@ function VideoSection() {
 function Who() {
   const items = [
     ['🥾', '무거운 배낭이 부담스러운 트레커', '장거리 트레킹에 도전하고 싶지만 무거운 짐 때문에 망설였던 분'],
-    ['🌿', '편안하게 걷고 싶은 트레킹 여행자', '체력이나 부상 이력 때문에 짐을 메고 오래 걷기 어려운 분'],
-    ['📷', '별도의 촬영 장비가 필요한 하이커', '카메라와 촬영 장비 등 트레킹 외에도 다양한 장비를 함께 챙기는 분'],
-    ['👨‍👩‍👧', '야영이 낯선 캠핑 입문자와 가족', '텐트와 야영 장비의 부담을 줄이고 조금 더 편안하게 시작하고 싶은 분'],
+    ['🌿', '더 편안하게 걷고 싶은 여행자', '체력 부담이나 부상으로 오래 걷기 어려운 분'],
+    ['📷', '별도의 장비가 필요한 하이커', '카메라와 촬영 장비 등 트레킹 외에도 다양한 장비를 함께 챙기는 분'],
+    ['👨‍👩‍👧', '야영이 낯선 입문자와 가족', '텐트와 야영 장비의 부담을 줄이고 조금 더 편안하게 시작하고 싶은 분'],
   ]
   return (
     <section id="who" style={{ padding: '104px 24px', background: '#f4efe3' }}>
