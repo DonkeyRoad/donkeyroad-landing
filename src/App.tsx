@@ -284,169 +284,36 @@ function Region() {
   )
 }
 
-// ── Signup form ───────────────────────────────────────────────────────────────
-type Status = 'idle' | 'submitting' | 'pending' | 'confirmed'
-
-const AGE_GROUPS = ['10대 이하','20대','30대','40대','50대','60대','70대 이상']
-const GENDERS = [{ value: 'female', label: '여성' }, { value: 'male', label: '남성' }, { value: 'no_answer', label: '응답 안 함' }]
-const STORE_KEY = 'donkeyroad_subscribers'
-
-type Subscriber = {
-  email: string
-  status: string
-  ageGroup?: string | null
-  gender?: string | null
-  marketingConsent?: boolean
-  createdAt?: string
-  verifiedAt?: string
-}
-
-function readStore(): Subscriber[] {
-  try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]') } catch { return [] }
-}
-function writeStore(list: Subscriber[]) {
-  try { localStorage.setItem(STORE_KEY, JSON.stringify(list)) } catch {}
-}
+// ── Launch notice: Kakao channel CTA ─────────────────────────────────────────
+// 채널 홈: http://pf.kakao.com/_PJpxnX (카카오톡 채널 관리자센터에서 확인)
+// 채널이 바뀌면 아래 ID 한 줄만 교체하면 친구추가·문의 링크가 함께 갱신됩니다.
+const KAKAO_CHANNEL_ID = '_PJpxnX'
+const KAKAO_CHANNEL_URL = `https://pf.kakao.com/${KAKAO_CHANNEL_ID}/friend`
+const KAKAO_CHANNEL_CHAT_URL = `https://pf.kakao.com/${KAKAO_CHANNEL_ID}/chat`
 
 function Signup() {
-  const [email, setEmail] = useState('')
-  const [ageGroup, setAgeGroup] = useState('')
-  const [gender, setGender] = useState('')
-  const [privacy, setPrivacy] = useState(false)
-  const [notify, setNotify] = useState(false)
-  const [marketing, setMarketing] = useState(false)
-  const [status, setStatus] = useState<Status>('idle')
-  const [confirming, setConfirming] = useState(false)
-  const [pendingNotice, setPendingNotice] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (status === 'submitting') return
-    const trimmed = email.trim().toLowerCase()
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) { setError('올바른 이메일 주소를 입력해 주세요.'); return }
-    if (!privacy || !notify) { setError('출시 알림 신청을 위해 필수 동의 항목을 확인해 주세요.'); return }
-    const store = readStore()
-    const existing = store.find((s) => s.email === trimmed)
-    if (existing) {
-      if (existing.status === 'subscribed') { setError('이미 출시 알림을 신청한 이메일입니다.'); return }
-      setError(''); setStatus('pending'); setPendingNotice(true); return
-    }
-    setError(''); setStatus('submitting')
-    setTimeout(() => {
-      const list = readStore()
-      if (!list.find((s) => s.email === trimmed)) {
-        list.push({ email: trimmed, status: 'pending', ageGroup: ageGroup || null, gender: gender || null, marketingConsent: marketing, createdAt: new Date().toISOString() })
-        writeStore(list)
-      }
-      setStatus('pending'); setPendingNotice(false)
-    }, 900)
-  }
-
-  const handleConfirm = () => {
-    if (confirming) return
-    setConfirming(true)
-    setTimeout(() => {
-      const list = readStore()
-      const s = list.find((x) => x.email === email.trim().toLowerCase())
-      if (s) { s.status = 'subscribed'; s.verifiedAt = new Date().toISOString(); writeStore(list) }
-      setConfirming(false); setStatus('confirmed'); setPendingNotice(false)
-    }, 800)
-  }
-
-  const reset = () => {
-    setEmail(''); setAgeGroup(''); setGender(''); setPrivacy(false); setNotify(false); setMarketing(false)
-    setStatus('idle'); setError(''); setPendingNotice(false)
-  }
-
-  const submitting = status === 'submitting'
-
   return (
     <section id="signup" style={{ padding: '104px 24px 108px', background: 'linear-gradient(180deg,#33452f 0%,#3f5c3a 100%)', color: '#eef0dd' }}>
       <div style={{ maxWidth: 560, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 36 }} data-reveal>
           <h2 style={{ margin: '0 0 14px', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: 'clamp(23px,3.1vw,32px)', lineHeight: 1.3, letterSpacing: '-.02em', wordBreak: 'keep-all' }}>동키로드의 첫 여정을 함께해 주세요.</h2>
-          <p style={{ margin: 0, fontSize: 16.5, color: '#c3d0a6' }}>동키로드가 봉화·울진에서 시작될 때 가장 먼저 알려드릴게요.</p>
+          <p style={{ margin: 0, fontSize: 16.5, color: '#c3d0a6', wordBreak: 'keep-all' }}>카카오톡 채널을 추가하시면, 동키로드가 봉화·울진에서 첫걸음을 시작할 때 가장 먼저 알려드릴게요.</p>
         </div>
-        <div data-reveal style={{ background: '#fbf7ee', color: '#2a332a', borderRadius: 22, padding: '32px 30px', boxShadow: '0 24px 60px rgba(0,0,0,.32)' }}>
 
-          {(status === 'idle' || status === 'submitting') && (
-            <form onSubmit={handleSubmit}>
-              <label style={{ display: 'block', fontSize: 14, fontWeight: 700, marginBottom: 8 }}>이메일 <span style={{ color: '#b0532f' }}>*</span></label>
-              <input type="email" value={email} onChange={(e) => { setEmail(e.target.value); setError('') }} placeholder="you@example.com" autoComplete="email"
-                style={{ width: '100%', padding: '14px 16px', border: '1.5px solid rgba(63,92,58,.3)', borderRadius: 12, fontSize: 16, background: '#fff', color: '#2a332a', marginBottom: 22 }} />
+        <div data-reveal style={{ background: '#fbf7ee', color: '#2a332a', borderRadius: 22, padding: '36px 30px 30px', boxShadow: '0 24px 60px rgba(0,0,0,.32)', textAlign: 'center' }}>
+          <div style={{ width: 66, height: 66, margin: '0 auto 20px', borderRadius: '50%', background: '#fee500', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30 }}>💬</div>
 
-              <label style={{ display: 'block', fontSize: 14, fontWeight: 700, marginBottom: 8 }}>연령대 <span style={{ fontWeight: 500, color: '#8a9078', fontSize: 12.5 }}>선택</span></label>
-              <div style={{ position: 'relative', marginBottom: 22 }}>
-                <select value={ageGroup} onChange={(e) => setAgeGroup(e.target.value)}
-                  style={{ width: '100%', padding: '14px 16px', border: '1.5px solid rgba(63,92,58,.3)', borderRadius: 12, fontSize: 15.5, background: '#fff', color: '#2a332a', appearance: 'none', cursor: 'pointer' }}>
-                  <option value="">선택 안 함</option>
-                  {AGE_GROUPS.map((ag) => <option key={ag} value={ag}>{ag}</option>)}
-                </select>
-                <span style={{ position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: '#8a9078' }}>▾</span>
-              </div>
+          <h3 style={{ margin: '0 0 12px', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: 22, color: '#2a332a' }}>동키로드의 첫 소식을 받아보세요.</h3>
+          <p style={{ margin: '0 0 26px', fontSize: 15, lineHeight: 1.65, color: '#4a5347', wordBreak: 'keep-all' }}>카카오톡 채널을 추가하고 동키로드의 첫 소식과 새로운 코스 소식을 가장 먼저 만나보세요.</p>
 
-              <label style={{ display: 'block', fontSize: 14, fontWeight: 700, marginBottom: 8 }}>성별 <span style={{ fontWeight: 500, color: '#8a9078', fontSize: 12.5 }}>선택</span></label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8, marginBottom: 26 }}>
-                {GENDERS.map((g) => {
-                  const active = gender === g.value
-                  return (
-                    <button key={g.value} type="button" onClick={() => setGender(active ? '' : g.value)}
-                      style={{ padding: '12px 8px', borderRadius: 11, fontSize: 14.5, fontWeight: 600, cursor: 'pointer', transition: 'all .18s', border: `1.5px solid ${active ? '#3f5c3a' : 'rgba(63,92,58,.28)'}`, background: active ? '#3f5c3a' : '#fff', color: active ? '#f7f3e8' : '#4a5347' }}>
-                      {g.label}
-                    </button>
-                  )
-                })}
-              </div>
+          <a href={KAKAO_CHANNEL_URL} target="_blank" rel="noopener noreferrer"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9, width: '100%', padding: 16, borderRadius: 12, background: '#fee500', color: '#191600', fontSize: 16, fontWeight: 700, textDecoration: 'none', transition: 'background .2s, transform .2s' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#f5dc00'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = '#fee500'; e.currentTarget.style.transform = '' }}>
+            동키로드 카카오톡 채널 추가하기
+          </a>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 24, padding: 18, background: 'rgba(90,117,81,.07)', borderRadius: 14 }}>
-                {[
-                  { checked: privacy, onChange: (v:boolean) => { setPrivacy(v); setError('') }, label: <><b style={{color:'#2a332a'}}>[필수]</b> 개인정보 수집·이용 동의 <span style={{color:'#7c8570'}}>(이메일, 선택 시 연령대·성별)</span></> },
-                  { checked: notify, onChange: (v:boolean) => { setNotify(v); setError('') }, label: <><b style={{color:'#2a332a'}}>[필수]</b> 출시 알림 이메일 수신 동의</> },
-                  { checked: marketing, onChange: (v:boolean) => setMarketing(v), label: <><b style={{color:'#7c8570'}}>[선택]</b> 이벤트·혜택 등 마케팅 정보 수신 동의</> },
-                ].map((item, i) => (
-                  <label key={i} style={{ display: 'flex', gap: 11, alignItems: 'flex-start', cursor: 'pointer', fontSize: 14, color: '#3a4535' }}>
-                    <input type="checkbox" checked={item.checked} onChange={(e) => item.onChange(e.target.checked)}
-                      style={{ marginTop: 3, width: 18, height: 18, accentColor: '#3f5c3a', flex: 'none', cursor: 'pointer' }} />
-                    <span>{item.label}</span>
-                  </label>
-                ))}
-              </div>
-
-              {error && <div style={{ marginBottom: 16, padding: '12px 15px', background: '#fbe9e2', border: '1px solid #e6b8a4', borderRadius: 11, fontSize: 14, color: '#9c4324' }}>{error}</div>}
-
-              <button type="submit" disabled={submitting}
-                style={{ width: '100%', padding: 16, border: 'none', borderRadius: 12, background: submitting ? '#6b7d63' : '#3f5c3a', color: '#f7f3e8', fontSize: 16, fontWeight: 700, cursor: submitting ? 'default' : 'pointer', transition: 'background .2s' }}>
-                {submitting ? '신청하고 있습니다...' : '출시 알림 받기'}
-              </button>
-              <p style={{ margin: '14px 0 0', fontSize: 11.5, color: '#9aa08e', textAlign: 'center' }}>개인정보 처리 주체·보유 기간·문의처는 정식 운영 전 확정됩니다.</p>
-            </form>
-          )}
-
-          {status === 'pending' && (
-            <div style={{ textAlign: 'center', padding: '8px 4px' }}>
-              <div style={{ width: 66, height: 66, margin: '0 auto 20px', borderRadius: '50%', background: '#e7efd9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 32 }}>📧</div>
-              <h3 style={{ margin: '0 0 12px', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: 22, color: '#2a332a' }}>확인 메일을 보냈어요</h3>
-              <p style={{ margin: '0 0 8px', fontSize: 15, color: '#4a5347' }}><b style={{ color: '#3f5c3a' }}>{email}</b> 로 확인 메일을 보냈습니다.</p>
-              <p style={{ margin: '0 0 24px', fontSize: 15, color: '#4a5347' }}>메일의 확인 버튼을 누르면 출시 알림 신청이 완료됩니다.</p>
-              {pendingNotice && <div style={{ marginBottom: 20, padding: '11px 14px', background: '#fdf4e3', border: '1px solid #e6cf9e', borderRadius: 11, fontSize: 13.5, color: '#8a6a2a' }}>아직 이메일 확인이 완료되지 않았습니다. 받은 편지함의 확인 메일을 확인해 주세요.</div>}
-              <button onClick={handleConfirm} disabled={confirming}
-                style={{ width: '100%', padding: 15, border: 'none', borderRadius: 12, background: '#3f5c3a', color: '#f7f3e8', fontSize: 15.5, fontWeight: 700, cursor: 'pointer' }}>
-                {confirming ? '확인 중...' : '이메일 확인하기 (데모)'}
-              </button>
-              <p style={{ margin: '12px 0 0', fontSize: 12, color: '#9aa08e' }}>데모: 실제로는 이메일의 링크에서 확인이 이뤄집니다.</p>
-            </div>
-          )}
-
-          {status === 'confirmed' && (
-            <div style={{ textAlign: 'center', padding: '14px 4px' }}>
-              <div style={{ width: 70, height: 70, margin: '0 auto 22px', borderRadius: '50%', background: '#3f5c3a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36 }}>✓</div>
-              <h3 style={{ margin: '0 0 14px', fontFamily: "'Gowun Batang', serif", fontWeight: 700, fontSize: 23, color: '#2a332a' }}>신청이 완료되었습니다</h3>
-              <p style={{ margin: '0 0 24px', fontSize: 15.5, color: '#4a5347' }}>출시 알림 신청이 완료되었습니다. 동키로드의 첫 여정이 시작되면 이메일로 알려드릴게요.</p>
-              <button onClick={reset} style={{ padding: '11px 22px', border: '1.5px solid rgba(63,92,58,.35)', borderRadius: 999, background: 'transparent', color: '#3f5c3a', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>다른 이메일로 신청</button>
-            </div>
-          )}
-
+          <p style={{ margin: '16px 0 0', fontSize: 12.5, color: '#9aa08e', wordBreak: 'keep-all' }}>카카오톡 채널은 언제든 자유롭게 추가하거나 해제할 수 있습니다.</p>
         </div>
       </div>
     </section>
@@ -463,9 +330,9 @@ function Footer() {
           <p style={{ margin: 0, fontSize: 14, color: '#9db184' }}>짐 없이 걷는 길, 짐이 지나며 살아나는 마을 — 동키로드</p>
         </div>
         <div style={{ fontSize: 13.5, lineHeight: 2, color: '#9db184' }}>
-          <div>문의: <a href="mailto:donkeyroad2026@gmail.com" style={{ color: '#c3d0a6' }}>donkeyroad2026@gmail.com</a></div>
-          <div>인스타그램: <span style={{ color: '#c3d0a6' }}>@donkeyroad.offical &nbsp;·&nbsp; @team.donkeylog</span></div>
-          <div><a href="#top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} style={{ color: '#c3d0a6' }}>개인정보 처리방침</a></div>
+          <div>문의: <a href={KAKAO_CHANNEL_CHAT_URL} target="_blank" rel="noopener noreferrer" style={{ color: '#c3d0a6' }}>카카오톡 채널 | 동키로드</a></div>
+          <div>이메일: <a href="mailto:donkeyroad.official@gmail.com" style={{ color: '#c3d0a6' }}>donkeyroad.official@gmail.com</a></div>
+          <div>인스타그램: <span style={{ color: '#c3d0a6' }}>@donkeyroad.official &nbsp;·&nbsp; @team.donkeylog</span></div>
         </div>
       </div>
       <div style={{ maxWidth: 1100, margin: '32px auto 0', paddingTop: 20, borderTop: '1px solid rgba(195,208,166,.16)', fontSize: 12.5, color: '#7c8f6b', display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'space-between' }}>
